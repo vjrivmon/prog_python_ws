@@ -431,3 +431,58 @@ print(lista)
 #creamos un entero aleatorio entre 1 y 4 (ambos incluidos)
 res = random.randint(1, 4)
 print(res)
+
+# EJERCICIOS
+
+# Dada una lista de enteros, muestra por pantalla si un número introducido por teclado está en la primera o en la última posición. 
+# La longitud mínima de la lista será de 1, en caso contrario, el programa terminará.
+
+lista = [4, 89, 32, 14, 9]
+numero_introducido = int(input("Introduce tu número: "))
+if numero_introducido == lista[0]:
+    print("Tu numero es el primer elemento de la lista")
+elif numero_introducido == lista[-1]:
+    print("Tu numero es el último elemento de la lista")
+else:
+    print("Tu numero no está en la primera ni en la última posición de la lista")
+
+# Pide 4 números y añádelos a una lista. 
+# Después, rota los elementos y guárdalos en una nueva lista (el último es el primero, etc.), 
+# mostrando por pantalla esta nueva lista.
+numero_uno = int(input("Introduce tu primer número de la lista: "))
+numero_dos = int(input("Introduce tu segundo número de la lista: "))
+numero_tres = int(input("Introduce tu tercer número de la lista: "))
+numero_cuatro = int(input("Introduce tu cuarto número de la lista: "))
+lista = [numero_uno, numero_dos, numero_tres, numero_cuatro]
+print("Esta es tu lista inicial: ", lista)
+lista.reverse()
+print("Vamos a rotar tu lista: ", lista)
+
+# Dadas dos listas de longitudes diferentes, averiguar si el primero o el último elemento de ambas listas es el mismo. 
+# En este caso, eliminar dicho elemento y mostrar las listas resultantes.
+lista_1 = [2, 8, 4]
+lista_2 = [7, 3, 1, 4]
+ultimo_valor_1 = lista_1[-1]
+ultimo_valor_2 = lista_2[-1]
+primer_valor_1 = lista_1[0]
+primer_valor_2 = lista_2[0]
+
+if lista_1[-1] == lista_2[-1]:
+    lista_1.remove(ultimo_valor_1)
+    lista_2.remove(ultimo_valor_2)
+    print(lista_1)
+    print(lista_2)
+elif lista_1[0] == lista_2[0]:
+    lista_1.remove(primer_valor_1)
+    lista_2.remove(primer_valor_2)
+    print(lista_1)
+    print(lista_2)
+
+# Dada una lista de enteros, averiguar si el primer o el último elemento es el mayor y sustituir el resto de elementos por éste (sin contar el primero el último). 
+# Por ejemplo, la lista [11, 5, 9, 7] debería quedar como [11, 11, 11, 7].
+lista = [2, 1, 0, 9, 3]
+print("Esta es tu lista inicial: ", lista)
+mayor = max(lista[0], lista[-1])
+for i in range(1, len(lista) - 1):
+    lista[i] = mayor
+print("Esta es tu lista modificada: ", lista)
