@@ -228,3 +228,206 @@ i = 0
 while i < 5:
     print(i)
     i += 1
+# El bucle for lo utilizamos cuando sabemos cuántas veces queremos que se repita el bucle.
+# La instrucción range(n) nos permite generar una secuencia de números desde 0 hasta n-1.
+# Ejemplo de for
+for i in range(5):
+    print(i)
+print("Fin del bucle")
+
+# Esto mismo lo podemos hacer escribiendo los valores que queremos iterar
+for i in 1, 2, 3, "casa", "coche", 3.14:
+    print(i)
+print("Fin del bucle")
+
+# EJERCICIOS
+# Realiza un programa para calcular el factorial de un número entero introducido por el teclado.
+numero = int(input("Introduce un número: "))
+factorial = 1
+i = numero
+while i > 0:
+    factorial = factorial * i
+    i = i - 1
+print("El factorial de tu número es: ", factorial)
+
+# Implementa un juego que genere un número entero aleatorio entre 1 y 100. 
+# Entonces, el usuario deberá introducir números por teclado para intentar adivinar el número generado. 
+# Cada vez que el usuario introduzca un número por teclado, el programa deberá determinar si el número es el generado inicialmente (ganando el usuario la partida), 
+# si el número introducido por el usuario es múltiplo o divisor del número (informando de que el número introducido es múltiplo o divisor), o si no es ninguno de los otros dos casos. 
+# Al final de la partida, el número de puntos obtenido por el usuario es 100 menos el número de intentos del usuario. 
+# La puntuación debe imprimirse al final del juego.
+import random
+numero_aleatorio = random.randint(1, 100)
+print(numero_aleatorio)
+puntos = 100
+numero_usuario = int(input("¿Cuál crees que es el número escogido? "))
+while numero_aleatorio != numero_usuario:
+    if numero_aleatorio % numero_usuario == 0:
+        print("¡FALLASTE! Pero tu número es divisor del número aleatorio")
+    elif numero_usuario !=0 and numero_aleatorio % numero_usuario == 0:
+        print("¡FALLASTE! Pero tu número es múltiplo del número aleatorio")
+    else:
+        print("¡LO SENTIMOS! Pero tu número no es ni divisor ni múltiplo del número aleatorio")
+    numero_usuario = int(input("Pero no te preocupes, tienes OTRO INTENTO: "))
+    puntos = puntos - 1
+print("¡ENHORABUENA! Has acabado el juego, tu puntuación final ha sido de:",puntos, "puntos")
+        
+# Estructuras de datos
+# Listas
+# Son secuencias de elementos separados por comas. La lista es una estructura que puede crecer o decrecer de forma dinámica según añaadimos o eliminamos elementos.
+# En Python, las listas pueden contener elementos de diferentes tipos.
+# Creación de listas
+datos = [] #lista vacía
+datos = list() #lista vacía
+datos = [4, "mensaje", -3, 4.5] #lista con 5 elementos
+# 2 de las operaciones más comunes: indexing y slicing
+# Indexing: acceder a un elemento de la lista mediante su posición (índice)
+print(datos[0]) #imprime el primer elemento de la lista
+# Podemos modificar un elemento de la lista
+datos[1] = "nuevo mensaje"
+# Se pueden utilizar índices negativos, donde -1 es el último elemento de la lista, -2 el penúltimo, etc.
+print(datos[-1]) #imprime el último elemento de la lista
+# Slicing: acceder a un conjunto de elementos de una lista
+# Esta operación nos permite trocear una lista en subconjuntos
+# Cada operación te devuelve una nueva lista
+print(datos[1:3]) #imprime los elementos 1 y 2 de la lista
+print(datos[:2]) #imprime los elementos 0 y 1 de la lista
+print(datos[2:]) #imprime los elementos 2 y 3 de la lista
+# Podemos modificar un conjunto de elementos de la lista
+datos[:2] = [1, 2]
+# Repetir elementos
+datos = [1, 2] * 3 # [1, 2, 1, 2, 1, 2]
+# Añadir elementos a una lista
+datos.append(4) # [1, 2, 1, 2, 1, 2, 4]
+# Podemos utilizar steps para saltarnos algunos elementos en la operación de slicing
+datos = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+print(datos[::2]) # [10, 12, 14, 16, 18]
+print(datos[2:7:3]) # [12, 15]
+'''
+Las listas nos ofrecen varios métodos muy útiles para trabajar con ellas, entre los que destacamos los siguientes:
+
+    len() Devuelve la longitud de la lista.
+    append() Añade un elemento al final de la lista.
+    clear() Elimina todos los elementos de la lista, dejándola vacía.
+    copy() Crea una copia de la lista.
+    count() Cuenta cuántas veces aparece un elemento en la lista.
+    extend() Añade los elementos de una lista al final de otra.
+    index() Devuelve la posición de un elemento dentro de la lista.
+    insert() Añade un elemento en una determinada posición de la lista.
+    pop() Elimina un elemento de la lista y lo devuelve.
+    del() Elimina un elemento de la lista por su posición.
+    remove() Elimina un elemento de la lista por su valor.
+    reverse() Invierte el orden de elementos de una lista.
+    sort() Ordena una lista. Con el parámetro reverse=True especificamos que sea orden inverso.
+
+'''
+
+datos = [4, "mensaje", -15, 3.4]
+
+#Obtener la longitud de una lista
+longitud = len(datos)
+print(longitud)
+
+#Añadir un elemento al final
+datos.append(12)
+print("Añado el 12 al final: ", datos)
+
+#Añadir un elemento en una posición determinada (sin machacar el existente)
+datos.insert(2,"nuevo_elemento")
+print("Añado 'nuevo_elemento' en pos 2: ", datos)
+
+#Buscar un elemento
+print("Posición del -15:", datos.index(-15))
+print("Está el -15?:", -15 in datos)
+
+#Combinar dos listas
+datos.extend([55, 22])
+print("Combino dos listas: ", datos)
+
+datos = [4, "mensaje", -15, 3.4]
+
+#Obtener la longitud de una lista
+longitud = len(datos)
+print(longitud)
+
+#Añadir un elemento al final
+datos.append(12)
+print("Añado el 12 al final: ", datos)
+
+#Añadir un elemento en una posición determinada (sin machacar el existente)
+datos.insert(2,"nuevo_elemento")
+print("Añado 'nuevo_elemento' en pos 2: ", datos)
+
+#Buscar un elemento
+print("Posición del -15:", datos.index(-15))
+print("Está el -15?:", -15 in datos)
+
+#Combinar dos listas
+datos.extend([55, 22])
+print("Combino dos listas: ", datos)
+
+datos = [4, "mensaje", -15, 3.4]
+
+#Obtener la longitud de una lista
+longitud = len(datos)
+print(longitud)
+
+#Añadir un elemento al final
+datos.append(12)
+print("Añado el 12 al final: ", datos)
+
+#Añadir un elemento en una posición determinada (sin machacar el existente)
+datos.insert(2,"nuevo_elemento")
+print("Añado 'nuevo_elemento' en pos 2: ", datos)
+
+#Buscar un elemento
+print("Posición del -15:", datos.index(-15))
+print("Está el -15?:", -15 in datos)
+
+#Combinar dos listas
+datos.extend([55, 22])
+print("Combino dos listas: ", datos)
+
+# Podemos utilizar un bucle FOR para recorrer los elementos de una lista
+datos = [4, "mensaje", -15, 3.4]
+for i in datos:
+    print(i)
+# Podemos utilizar la instrucción in para comprobar si un elemento está en la lista (método mucho más cómodo que utilizar un bucle)
+if "mensaje" in datos:
+    print("mensaje está en la lista")
+is_34 = 3.4 in datos
+print(is_34)
+is_23 = 23 in datos
+print(is_23)
+
+# Break nos permite romper el bucle en el momento en el que se cumple una condición
+for i in [5, 2, 3, 7, 4, 1, 7]:
+  if i == 7:
+    print("Encontrado!")
+    break
+
+print("Fin")
+
+# Continue nos permite saltar a la siguiente iteración del bucle en el momento en el que se cumple una condición
+for i in [5, 2, 3, 7, 4, 1, 7]:
+  if i == 7:
+    print("Encontrado!")
+    continue
+  print("Este código sólo se ejecuta si no entra por el if, ya que el continue se carga la iteración")
+print("Fin")
+
+# Módulo RANDOM
+# nos permite realizar acciones aleatorias como generar números aleatorios, imprimir un valor de una lista, etc.
+import random
+  
+#imprimimos un valor aleatorio
+lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(random.choice(lista))
+
+#barajamos una lista
+random.shuffle(lista)
+print(lista)
+
+#creamos un entero aleatorio entre 1 y 4 (ambos incluidos)
+res = random.randint(1, 4)
+print(res)
