@@ -91,12 +91,117 @@ get_minimum(numeros)
 
 def every_element_greater_than(numero, lista):
     for i in lista:
-        if i <= numero:
-            print("Tu numero no es mayor a los que hay en la lista")
-            return False  
+        if numero <= i:
+            print("Tu número no es mayor a todos los elementos de la lista")
+            return False
+    print("Tu número es mayor a todos los elementos de la lista")
     return True
 
 # -------- MAIN --------
-numero = 6
+numero = 2
 lista = [2, 1, 0, 3]
-every_element_greater_than(numero, lista)
+resultado = every_element_greater_than(numero, lista)
+print("Resultado:", resultado)
+
+# Crea una función llamada greater_than_average que tome un parámetro x de tipo numérico, 
+# y una lista llamada data_array. La función deberá devolver cierto en caso de que el valor x sea mayor que la media de la lista, y falso en caso contrario.
+
+def greather_than_average(x, data_array):
+    suma = 0
+    for i in data_array:
+        suma = suma + i
+    media = suma / len(data_array)
+    if x > media:
+        print("True")
+        return True
+    else: 
+        print("False")
+        return False
+
+# -------- MAIN --------
+x = 7
+data_array=[3, 5, 8, 9]
+greather_than_average(x, data_array)
+
+# Crea una función llamada clean_list que tome una lista de nombres de usuarios 
+# y una lista de nombres de usuarios baneados y devuelva una nueva lista con los usuarios no baneados.
+
+def clean_list(limpios, baneados):
+    lista = []
+    for usuario in limpios:
+        if usuario not in baneados:
+            lista.append(usuario)
+    print(lista)
+    return lista
+
+# -------- MAIN --------
+limpios = ["Alberto", "Cesar", "Mariano", "Victor"]
+baneados = ["Cesar", "Victor"]
+clean_list(limpios, baneados)
+
+# COMPREHENSIONS
+# Son una forma de crear listas, diccionarios y conjuntos de forma más eficiente y legible
+# Son una forma elegante de definir y crear listas basándonos en otras listas
+# Imagina que queremos crear una lista que multiplique por dos los elementos de otra lista. 
+# Esto lo podríamos hacer de varias maneras: 
+# (1) de manera tradicional iterando la lista con un bucle
+# (2) utilizando una función map(), pero también 
+# (3) con una comprehension. 
+# Observa el siguiente ejemplo que produce el mismo resultado de las 3 maneras:
+
+valores = [2, 5, 12, 10]
+
+# (1) Manera tradicional
+resultado = []
+for i in valores:
+  resultado.append(i * 2)
+print(resultado)
+
+# (2) Ejemplo con map
+resultado = map(lambda i : i * 2, valores)
+print(list(resultado))
+
+# (3) Ejemplo con comprehension
+resultado = [i * 2 for i in valores]
+print(resultado)
+
+# Sintaxis de una comprehension
+# nueva_lista = [expression for item in list]
+# expression: operación que se va a realizar
+# item: elemento de la lista
+# list: lista de elementos
+
+# Así nos podemos quedar con los pares y mayores que 10
+lista = [14, 5, 12, 16, 9, 7, 10]
+
+nueva = [x for x in lista if x % 2 == 0 if x > 10]
+print(nueva)
+
+# También if y else
+lista = [14, 5, 12, 16, 9, 7, 10]
+
+nueva = [ x if x % 2 == 0 else 0 for x in lista ]
+print(nueva)
+
+# Una comprehension puede transformarse en un bucle, pero no yodos los bucles pueden transformarse en una comprehension
+
+# EJERCICIOS
+
+# Crea una función llamada squares_greater que dada una lista de números, 
+# devuelva una nueva lista con los cuadrados de aquellos números mayores que 10.
+lista = [5, 9, 13, 3, 20, 57, 33, 11]
+nueva = [x*x for x in lista if x >10]
+print(nueva)
+
+# Crea una función llamada word_length que dada una lista de palabras, 
+# devuelva una nueva lista con la longitud de cada una siempre y cuando la palabra no sea "el".
+lista = ["el", "macaco", "de", "tu", "pito"]
+nueva = [x if x == "el" else len(x) for x in lista]
+print(nueva)
+
+# Crea una función llamada clean_list que tome una lista de nombres de usuarios 
+# y una lista de nombres de usuarios baneados y devuelva una nueva lista con los usuarios no baneados.
+limpios = ["Yilun", "Pablo", "Mimi", "Irene", "Vicente"]
+baneados = ["Yilun", "Pablo"]
+nueva = [x for x in limpios if x not in baneados]
+print(nueva)
