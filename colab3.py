@@ -205,3 +205,165 @@ limpios = ["Yilun", "Pablo", "Mimi", "Irene", "Vicente"]
 baneados = ["Yilun", "Pablo"]
 nueva = [x for x in limpios if x not in baneados]
 print(nueva)
+
+# TUPLAS
+# Son colecciones de datos ordenadas e inmutables
+# Se definen con paréntesis
+# Se pueden acceder a los elementos de una tupla mediante el índice
+tupla = (1, 2, 3, 4, 5)
+print(tupla)
+print(tupla[0])
+valor = tupla[1] + tupla[2]
+print(valor)
+# Los métodos que coinciden con las listas son: count(), index() y len()
+# Para inicializar una tupla con un único valor:
+tupla = (1,)
+print(tupla)
+
+# Podemos devolver varios valores en una función
+def operaciones(a, b):
+    suma = a + b
+    resta = a - b
+    return suma, resta
+a = 5
+b = 3
+resultado = operaciones(a, b)
+print("Suma:", resultado[0], "Resta:", resultado[1])
+
+# DICCIONARIOS
+# Son un ejemplo de estructura donde almacenamos datos en pares clave-valor.
+# El valor es propiamente el dato que forma parte de la colección, mientras que la clave es un identificador único que nos permite acceder a dicho valor.
+# Como los valores de un diccionario no están ordenados, no podemos acceder a ellos mediante un índice, sino que lo hacemos mediante la clave.
+# Es similar a una lista, pero en lugar de usar índices, usamos claves para acceder a los elementos. 
+# Ejemplo de claves: numeros de teléfono, DNI o dirección de correo.
+# Se declara con la palabra reservada dict() o con llaves {}
+dic1 = {}
+dic2 = dict()
+dic = {"nombre": "Pepe", "edad": 25, "ciudad": "Valencia"}
+print(dic)
+# Los pares clave-valor se encuentran separados por comas y la clave y el valor por dos puntos.
+# A la izquierda queda la clave y a la derecha el valor.
+dic = {11: 42.1, "usuario2": 33, (1,3,4): "valor3"}
+print(dic)
+
+# Operaciones dentro de un Diccionario:
+# Para acceder a un valor, se hace mediante la clave
+dic = {456: "Pepe", "edad": 25, "ciudad": "Valencia"}
+print(dic[456])
+
+# Obtener el tamaño de un diccionario
+print(len(dic))
+
+# Comprobar si una clave existe en un diccionario
+res = "nombre" in dic
+print("¿Existe la clave 'nombre'?", res)
+
+# También podemos almacenar nuevos pares clave-valor en un diccionario empleando la misma sintaxis que empleamos para el acceso a valores.
+# Utilizamos la misma sintaxis para insertar un nuevo dato como también para sobreescribir valores asociados a claves ya empleadas en el diccionario
+d = { 'usuario1': 23, 'usuario7': 10, 'usuario2' : 4 }
+d['usuario3'] = 15
+d["usuario1"] = 0 
+print(d) 
+
+dic = {123: "Juan", 456: "Maria", 789: "Pedro", "sdfas": 344}
+
+# Añadir / Modificar un elemento
+dic[122] = "Eva" #si no existe lo añade
+dic["sdfas"] = 345 #si existe lo modifica
+print("Modifico clave 'sdfas' y añado la 122: ",dic)
+
+#Otra forma de añadir/modificar el valor de una clave
+dic.update({123: "Laura", 456: "Carlos"})
+print("Modifico clave 123 y 456: ",dic)
+
+# Eliminar un elemento por su clave
+del dic[123]
+
+#Otra forma mediante la que nos podemos guardar el valor eliminado
+valor = dic.pop(456)
+print("Elimino clave 123 y guardo el valor de la clave 456: ",dic, valor)
+
+# Eliminar todo el diccionario y la variable
+#del dic
+# Eliminar todos los datos pero mantener la variable
+dic.clear()
+print("Elimino el diccionario: ",dic)
+
+# Recorrar las claves que tenemos en un Diccionario
+dic = {123: "Juan", 456: "Maria", 789: "Pedro", "sdfas": 344}
+
+# Recorrer un diccionario
+print("Recorremos un diccionario:")
+for i in dic:
+    print("Clave: ",i," Valor: ",dic[i])
+
+# Otra forma de recorrerlo un diccionario
+print("\nOtra forma de recorrerlo:")
+for i in dic.keys():
+  print("Clave: ",i," Valor: ",dic[i])
+
+# Recorrer los valores de un Diccionario
+print("\nRecorremos los valores de un diccionario:")
+for i in dic.values():
+    print(i)
+
+#Otra forma de recorrer en dos variables
+print("\nPor claves y valores:")
+for k, v in dic.items():
+    print("Clave: ",k," Valor: ",v)
+
+# También puedes utilizar una comprehension sobre un diccionario. 
+# Lo único que cambia con respecto a listas es que tienes que definir la clave.
+
+# Ejemplo de comprehension con aquellos items mayores que 100
+dic = {"first": 20, "second": 556, "third": 212, "fourth": 89}
+
+nuevo_dic = {i : dic[i] for i in dic.keys() if dic[i] > 100}
+print(nuevo_dic)
+
+# Funciones para utilizar con diccionarios
+'''
+
+    clear() Vacía un diccionario eliminando toads las claves y valores.
+    copy() Devuelve una copia del diccionario.
+    fromkeys() Devuelve una nueva copia del diccionario pero solo con unas claves concretas.
+    get() Devuelve el valor de una clave concreta, o None si no existe.
+    items() Devuelve una lista de items como una tupla para cada par de clave-valor.
+    keys() Devuelve una lista de todas las claves.
+    pop() Elimina el item que tenga una clave determinada y lo guarda e una variable.
+    popitem() Elimina el último par de clave-valor.
+    update() Modifica el valor de una clave determinada, o lo añade si no existe.
+    values() Devuelve una lista de todos los valores.
+
+'''
+
+# Multiples valores en un diccionario
+persona = {
+    "nombre": "Pepe",
+    "edad": 25,
+    "ciudad": "Valencia",
+    "email": "paco@gmail.com"
+}
+
+#La forma de acceder a los datos de una persona sería así:
+print(persona["nombre"])
+print(persona["edad"])
+print(persona["ciudad"])
+print(persona["email"])
+
+# Podemos tener una clave asociada a cada persona
+
+persona = {
+    "nombre" : "Paco",
+    "fecha" : "02/04/1980",
+    "poblacion" : "Valencia"
+}
+
+persona2 = {
+    "nombre" : "Ana",
+    "fecha" : "22/10/1985",
+    "poblacion" : "Gandia"
+}
+
+
+dic = { 123: persona, 456: persona2 }
