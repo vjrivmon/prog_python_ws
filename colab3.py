@@ -367,3 +367,90 @@ persona2 = {
 
 
 dic = { 123: persona, 456: persona2 }
+print(dic)
+
+# EJERCICIOS
+
+# 1. Escribe una función que reciba dos diccionarios con claves de tipo string y valores de tipo numérico, 
+# y que devuelva un nuevo diccionario que contenga los dos anteriores. Muestra el resultado por pantalla.
+
+def nuevo_diccionario(dic1, dic2):
+    dic3 = dic1.copy()
+    dic3.update(dic2)
+    return dic3
+
+dic1 = {"hola": 1, "adios": 2, "como": 3, "estás": 4, "yo": 5}
+dic2 = {"muy": 6, "bien": 7, "y": 8, "tu": 9, "que": 10, "tal": 11, "?": 12}
+
+resultado = nuevo_diccionario(dic1, dic2)
+print(resultado)
+
+# 2. Escribe una función que reciba un diccionario y una lista de palabras. 
+# La función debe devolver un nuevo diccionario con los items del diccionario 
+# cuyas claves correspondan a alguna de las palabras de la lista. 
+# Muestra el resultado por pantalla.
+
+def coincidencia(dic, lista):
+    dic2 = {k: dic[k] for k in lista if k in dic}
+    return dic2
+
+dic = {"Hola": 123, "adios": 9, "pues": 1, "muy": 9, "bien": 3}
+lista = ["Hola", "me", "llamo", "Vicente", "y", "estoy", "muy", "bien"]
+res = coincidencia(dic, lista)
+print(res)
+
+# 3. Escribe un programa que lea un texto por teclado. 
+# Posteriormente debe crear un diccionario donde las claves sean las palabras del texto 
+# y sus valores el número de apariciones de cada una de éstas en el texto. Muestra el resultado por pantalla.
+
+# Leer el texto del usuario
+texto = input("Introduce tu texto: ")
+
+# Función para contar las apariciones de cada palabra
+def contar_palabras(texto):
+    palabras = texto.split()  # Dividir el texto en palabras
+    diccionario = {}
+    for palabra in palabras:
+        if palabra in diccionario:
+            diccionario[palabra] += 1  # Incrementar el contador si la palabra ya está en el diccionario
+        else:
+            diccionario[palabra] = 1  # Añadir la palabra al diccionario con un contador de 1
+    return diccionario
+
+# Contar las palabras en el texto
+resultado = contar_palabras(texto)
+
+# Mostrar el resultado por pantalla
+print(resultado)
+        
+# 4. Escribe una función que reciba un diccionario de valores numéricos y devuelva el valor mínimo de este diccionario. 
+# Muestra el resultado por pantalla.
+def valor_minimo(dic):
+    dic2 = dic.values()
+    minimo = next(iter(dic2))  # Inicializar con el primer valor del diccionario
+    for i in dic2:
+        if i < minimo:
+            minimo = i
+    print("El valor minimo en tu diccionario es: ",minimo)
+    return minimo
+
+dic = {"1": 1, "5": 8, "4": 7, "90": 12}
+res = valor_minimo(dic)
+
+# 5. Escribe una función que reciba el siguiente diccionario y cuente la cantidad de items que tienen True el campo success:
+
+def items(dic):
+    contador = 0
+    for key in dic:
+        if dic[key]['success'] == True:
+            contador += 1
+    print("Número de veces que aparece True: ", contador)
+    return contador
+
+dic = {
+ 1 : {'id': 1, 'success': True, 'name': 'Lary'},
+ 2 : {'id': 2, 'success': False, 'name': 'Rabi'},
+ 3 : {'id': 3, 'success': True, 'name': 'Alex'}
+}
+
+res = items(dic)
