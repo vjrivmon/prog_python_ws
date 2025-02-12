@@ -23,6 +23,10 @@ class Flight:
             model: The model of the aircraft such as 'Airbus A319'
         """
         model = self.__aircraft.get_model()
+        if isinstance(self.__aircraft, Airbus):
+            model += f" {self.__aircraft.get_variant()}"
+        elif isinstance(self.__aircraft, Boeing):
+            model += f" ({self.__aircraft.get_airline()})"
         return (model)
     
     def allocate_passenger(self, seat, passenger):

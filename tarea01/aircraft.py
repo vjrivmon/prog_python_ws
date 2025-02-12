@@ -49,8 +49,8 @@ class Aircraft:
         return (seats)
 
 class Airbus(Aircraft):
-    def __init__(self,registration, model, num_rows, num_seats_per_row, variant):
-        super().__init__(model, registration, num_rows, num_seats_per_row)
+    def __init__(self, registration, variant, model="Airbus", num_rows=22, num_seats_per_row=6):
+        super().__init__(registration, model, num_rows, num_seats_per_row)
         self.__variant = variant
     
     def get_variant(self):
@@ -62,7 +62,7 @@ class Airbus(Aircraft):
         return (variant)
     
 class Boeing(Aircraft):
-    def __init__(self, registration, model, num_rows, num_seats_per_row, airline):
+    def __init__(self, registration, airline, model="Boeing", num_rows=30, num_seats_per_row=9):
         super().__init__(registration, model, num_rows, num_seats_per_row)
         self.__airline = airline
     
