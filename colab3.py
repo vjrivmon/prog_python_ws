@@ -454,3 +454,132 @@ dic = {
 }
 
 res = items(dic)
+
+
+# Iteradores y Generadores
+#r ecorremos un string
+palabra = "hola"
+for i in palabra:
+  print(i)
+
+#recorremos una lista
+lista = [2, 5, 8, 0, 11]
+for i in lista:
+  print(i)
+
+#recorremos un diccionario
+dic = {123: "Juan", 456: "Maria", 789: "Pedro"}
+for i in dic:
+  print(i)
+
+# Podemos usar la función iter() para obtener un iterador de un objeto iterable
+lista = [2, 5, 8, 0, 11]
+
+#obtenemos un iterator sobre la lista
+iterador = iter(lista)
+
+#utilizamos next cada vez que queremos el siguiente dato del iterador
+print("Ahora me hace falta un dato")
+print(next(iterador))
+print("Ahora me hace falta otro")
+print(next(iterador))
+print("Ahora otro")
+print(next(iterador))
+
+# Una función generadora es una función que devuelve un objeto generador en lugar de una secuencia de valores
+# Cada vez que se le pasa como parametro a la función next(), se ejecuta hasta que se encuentra con la palabra reservada yield
+# Para construir una función generadora, simplemente tenemos que utilizar yield en vez de return, pero el resto del código es similar. 
+#Función generadora de números pares
+def numeros():
+  i = 0
+  #bucle infinito
+  while True:
+    yield i
+    i+=2
+
+#La función generadora nos devuelve un generador
+generador = numeros()
+
+#utilizamos next cada vez que queremos generar un nuevo dato
+print("Ahora me hace falta un dato")
+print(next(generador))
+print("Ahora me hace falta otro")
+print(next(generador))
+print("Ahora otro")
+print(next(generador))
+
+# Cuando llamamos a next la primera vez, la función se ejecuta hasta encontrar el yield, 
+# que devuelve el valor indicado y que congelará la ejecución de la función hasta la próxima vez que pidamos un nuevo valor.
+
+#Función generadora de números pares
+def numeros():
+  print("NUMEROS: inicio de la función")
+  i = 0
+  #bucle infinito
+  while True:
+    print("NUMEROS: antes del yield")
+    yield i
+    print("NUMEROS: después del yield")
+    i+=2
+
+#La función generadora nos devuelve un generador
+generador = numeros()
+print("Después de llamar a la función y obtener el generador")
+
+#utilizamos next cada vez que queremos generar un nuevo dato
+print("Ahora me hace falta un dato")
+print(next(generador))
+print("Ahora me hace falta otro")
+print(next(generador))
+print("Ahora otro")
+print(next(generador))
+
+# EJERCICIOS
+
+# Fibonacci
+# Escribe una función generadora de la secuencia de Fibonacci y comprueba su correcto funcionamiento. 
+# Los valores de esta secuencia se calculan siguiendo la siguiente fórmula:
+
+def fibo():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+        
+generador = fibo()
+print(next(generador))
+print(next(generador))
+print(next(generador))
+print(next(generador))
+
+# Nueva Función Generadora
+def suma_tiempos(inicio, fin, incremento):
+    """Función que devuelve tuplas de tiempo (hh,mm,ss) desde una hora inicial hasta una hora final
+    Args: 
+        inicio (hh,mm,ss): Hora inicial
+        fin (hh,mm,ss): Hora final
+        incremento (segundos): Incremento en segundos
+    Returns: 
+        hora (hh,mm,ss): Tupla de tiempo
+    """
+    h, m, s = inicio
+    h_fin, m_fin, s_fin = fin
+
+    while (h, m, s) <= (h_fin, m_fin, s_fin):
+        yield (h, m, s)
+        s += incremento
+        m += s // 60
+        s = s % 60
+        h += m // 60
+        m = m % 60
+
+# Ejemplo de uso
+inicio = (2, 12, 36)
+fin = (2, 14, 0)
+incremento = 3600
+
+generador = suma_tiempos(inicio, fin, incremento)
+for tiempo in generador:
+    print(tiempo)
+
+
