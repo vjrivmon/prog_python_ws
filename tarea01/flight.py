@@ -21,21 +21,17 @@ class Flight:
             number (str): El número del vuelo.
             aircraft (Aircraft): La aeronave asignada al vuelo.
         """
-        try:
-            if not number[:2].isalpha():
-                raise ValueError(f"El número de vuelo {number} debe comenzar con dos letras.")
-            if not number[:2].isupper():
-                raise ValueError(f"Los dos primeros caracteres del número de vuelo {number} deben estar en mayúsculas.")
-            if not number[2:].isdigit() or int(number[2:]) >= 9999:
-                raise ValueError(f"Los siguientes caracteres del número de vuelo {number} deben ser dígitos y formar un número menor que 9999.")
-        except ValueError as e:
-            print(e)
-            return -1
-        finally:
-            self.__number = number
-            self.__aircraft = aircraft
-            rows, seats = self.__aircraft.seating_plan()
-            self.__seating = {f"{row}{seat}": None for row in rows for seat in seats}
+        if not number[:2].isalpha():
+            raise ValueError(f"El número de vuelo {number} debe comenzar con dos letras.")
+        if not number[:2].isupper():
+            raise ValueError(f"Los dos primeros caracteres del número de vuelo {number} deben estar en mayúsculas.")
+        if not number[2:].isdigit() or int(number[2:]) >= 9999:
+            raise ValueError(f"Los siguientes caracteres del número de vuelo {number} deben ser dígitos y formar un número menor que 9999.")
+        
+        self.__number = number
+        self.__aircraft = aircraft
+        rows, seats = self.__aircraft.seating_plan()
+        self.__seating = {f"{row}{seat}": None for row in rows for seat in seats}
     
     def get_number(self):
         """
@@ -68,15 +64,10 @@ class Flight:
             seat (str): Un ejemplo de asiento es '12C' o '21F'.
             passenger (tuple): Datos de ejemplo de un pasajero ('Jack', 'Shephard', '85994003S').
         """
-        try:
-            row, letter = self.__parse_seat(seat)
-            if self.__seating[f"{row}{letter}"] is not None:
-                raise ValueError(f"El asiento {seat} está ya ocupado")
-        except ValueError as e:
-            print(e)
-            return -1
-        finally:
-            self.__seating[f"{row}{letter}"] = passenger
+        row, letter = self.__parse_seat(seat)
+        if self.__seating[f"{row}{letter}"] is not None:
+            raise ValueError(f"El asiento {seat} está ya ocupado")
+        self.__seating[f"{row}{letter}"] = passenger
     
     def reallocate_passenger(self, from_seat, to_seat):
         """
@@ -86,20 +77,16 @@ class Flight:
             from_seat (str): El diseñador de asiento existente para el pasajero como '12C'.
             to_seat (str): El nuevo diseñador de asiento.
         """
-        try:
-            from_row, from_letter = self.__parse_seat(from_seat)
-            to_row, to_letter = self.__parse_seat(to_seat)
+        from_row, from_letter = self.__parse_seat(from_seat)
+        to_row, to_letter = self.__parse_seat(to_seat)
 
-            if self.__seating[f"{from_row}{from_letter}"] is None:
-                raise ValueError(f"Ningún pasajero recolocado en el asiento {from_seat}")
-            if self.__seating[f"{to_row}{to_letter}"] is not None:
-                raise ValueError(f"El asiento {to_seat} está ocupado")
-        except ValueError as e:
-            print(e)
-            return -1
-        finally:
-            self.__seating[f"{to_row}{to_letter}"] = self.__seating[f"{from_row}{from_letter}"]
-            self.__seating[f"{from_row}{from_letter}"] = None
+        if self.__seating[f"{from_row}{from_letter}"] is None:
+            raise ValueError(f"Ningún pasajero recolocado en el asiento {from_seat}")
+        if self.__seating[f"{to_row}{to_letter}"] is not None:
+            raise ValueError(f"El asiento {to_seat} está ocupado")
+        
+        self.__seating[f"{to_row}{to_letter}"] = self.__seating[f"{from_row}{from_letter}"]
+        self.__seating[f"{from_row}{from_letter}"] = None
 
     def num_available_seats(self):
         """
@@ -144,24 +131,20 @@ class Flight:
         Returns:
             tuple: Una tupla que contiene la fila (int)(12) y la letra (str)(C) del asiento.
         """
-        try:
-            row_numbers, seat_letters = self.__aircraft.seating_plan()
-            letter = seat[-1]
-            if letter not in seat_letters:
-                raise ValueError(f"Letra de asiento inválida {letter} para este avión")
-            
-            row_text = seat[:-1]
-            if not row_text.isdigit():
-                raise ValueError(f"Número de fila inválido {row_text}. Comprueba de que se traten de valores numéricos")
-            
-            row = int(row_text)
-            if row not in row_numbers:
-                raise ValueError(f"El valor de fila es inválido {row}")
-        except ValueError as e:
-            print(e)
-            return -1
-        finally:
-            return (row, letter)
+        row_numbers, seat_letters = self.__aircraft.seating_plan()
+        letter = seat[-1]
+        if letter not in seat_letters:
+            raise ValueError(f"Letra de asiento inválida {letter} para este avión")
+        
+        row_text = seat[:-1]
+        if not row_text.isdigit():
+            raise ValueError(f"Número de fila inválido {row_text}. Comprueba de que se traten de valores numéricos")
+        
+        row = int(row_text)
+        if row not in row_numbers:
+            raise ValueError(f"El valor de fila es inválido {row}")
+        
+        return (row, letter)
 
     def __passenger_seats(self):
         """

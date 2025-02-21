@@ -75,5 +75,33 @@ def test_print_boarding_cards():
     f1.allocate_passenger("12A", p1.passenger_data())
     f1.print_boarding_cards()
 
+def test_invalid_flight_number():
+    """
+    Prueba la validación del número de vuelo.
+    """
+    with pytest.raises(ValueError):
+        Flight(number="117BA", aircraft=Aircraft(registration="G-EUAH", model="Airbus A319", num_rows=22, num_seats_per_row=6))
+
+def test_invalid_seat_allocation():
+    """
+    Prueba la asignación de un asiento inválido.
+    """
+    f1 = Flight(number="BA117", aircraft=Aircraft(registration="G-EUAH", model="Airbus A319", num_rows=22, num_seats_per_row=6))
+    p1 = Passenger("Jack", "Shephard", "85994003S")
+    with pytest.raises(ValueError):
+        f1.allocate_passenger("30A", p1.passenger_data())
+
+def test_reallocate_to_occupied_seat():
+    """
+    Prueba la reasignación a un asiento ocupado.
+    """
+    f1 = Flight(number="BA117", aircraft=Aircraft(registration="G-EUAH", model="Airbus A319", num_rows=22, num_seats_per_row=6))
+    p1 = Passenger("Jack", "Shephard", "85994003S")
+    p2 = Passenger("Kate", "Austen", "12589756P")
+    f1.allocate_passenger("12A", p1.passenger_data())
+    f1.allocate_passenger("15F", p2.passenger_data())
+    with pytest.raises(ValueError):
+        f1.reallocate_passenger("12A", "15F")
+
 if __name__ == "__main__":
     pytest.main()
